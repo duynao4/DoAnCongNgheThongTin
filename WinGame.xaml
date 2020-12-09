@@ -1,0 +1,175 @@
+﻿<Window x:Class="DoAn1.WinGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAn1"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="680" Width="1024">
+    <Window.Background>
+        <ImageBrush ImageSource="images/anhnen.png"></ImageBrush>
+    </Window.Background>
+    <Grid>
+        <DockPanel PreviewMouseLeftButtonDown="DockPanel_PreviewMouseLeftButtonDown"
+                   HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top" Background="Transparent" Height="25">
+            <Image DockPanel.Dock="Right" Source="Images/x.png"
+                   Cursor="Hand"                  
+                   PreviewMouseDown="Image_PreviewMouseDown_1"
+                   Margin="0 0 15 0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="15"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Image.IsMouseOver" Value="True">
+                                <Setter Property="Width" Value="25"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image DockPanel.Dock="Right" Source="Images/-.png" 
+                   PreviewMouseDown="Image_PreviewMouseDown"
+                   Margin="0 0 10 0" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="15"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Image.IsMouseOver" Value="True">
+                                <Setter Property="Width" Value="25"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </DockPanel>
+        <MediaElement x:Name="video" Source="" HorizontalAlignment="Left"  Height="655" VerticalAlignment="Top" Width="1024" Margin="0,25,0,0"/>
+        <!--Button trở về chơi l-->
+        <Grid HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Height="100"
+               Cursor="Hand"
+               Margin="720,222,2,-350"
+               MouseDown="Image_MouseDown_WinGame"
+                MouseEnter="Image_MouseEnter_WinGame" RenderTransformOrigin="0.662,-0.087">
+            <Image Margin="0,0,10,0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="images/button/0%-imotal-kteam.png"></Setter>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsWinGame}" Value="False"></Condition>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Grid}, Path=IsMouseOver}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsWinGame}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
+            <StackPanel HorizontalAlignment="Right"                        
+                    Width="100"                        
+                    Cursor="Hand"
+               Margin="0 0 20 1"
+                    VerticalAlignment="Bottom">
+                <TextBlock Name="abc" TextWrapping="Wrap"
+                           FontSize="30"
+                           TextAlignment="Right" 
+                           FontFamily="{StaticResource mainFont}" Height="48" Margin="-36,0,28,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="359.162"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Style>
+                        <Style  TargetType="{x:Type TextBlock}">
+                            <Setter Property="Text" Value="BACK"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsWinGame}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource BackGameStoryStart}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsWinGame}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource BackGameStoryStart}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock x:Name="winscore" FontFamily="{StaticResource mainFont}"
+                   Foreground="#00FFFF"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,478,10"
+                   FontSize="27" Height="45" Width="546">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="Congratulations You Win With Score"></Setter>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Window.Loaded">
+                            <BeginStoryboard Storyboard="{StaticResource createStoryWin}"></BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <TextBlock x:Name="losescore" FontFamily="{StaticResource mainFont}"
+                   Foreground="Red"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="149,0,633,4"
+                   FontSize="45" Height="61" Width="242">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value=" You Lose"></Setter>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Window.Loaded">
+                            <BeginStoryboard Storyboard="{StaticResource createStoryLose}"></BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</Window>

@@ -1,0 +1,399 @@
+﻿<Window x:Class="DoAn1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAn1"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="680" Width="1024">
+    <Window.Background>
+
+        <ImageBrush ImageSource="images/anhnen.png"></ImageBrush>
+    </Window.Background>
+
+    <Grid>
+        <DockPanel PreviewMouseLeftButtonDown="DockPanel_PreviewMouseLeftButtonDown"
+                   HorizontalAlignment="Stretch" LastChildFill="False" VerticalAlignment="Top" Background="Transparent" Height="25">
+            <Image DockPanel.Dock="Right" Source="Images/x.png"
+                   Cursor="Hand"                  
+                   PreviewMouseDown="Image_PreviewMouseDown_1"
+                   Margin="0 0 15 0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="15"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Image.IsMouseOver" Value="True">
+                                <Setter Property="Width" Value="25"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Image DockPanel.Dock="Right" Source="Images/-.png" 
+                   PreviewMouseDown="Image_PreviewMouseDown"
+                   Margin="0 0 10 0" Cursor="Hand">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="15"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Image.IsMouseOver" Value="True">
+                                <Setter Property="Width" Value="25"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </DockPanel>
+        <Image Source="images/anhLogo3-removebg-preview.png"
+               Height="73"
+               Margin="160,222,0,0"
+               Cursor="Hand"
+               HorizontalAlignment="Left" VerticalAlignment="Top" Width="72" RenderTransformOrigin="1.671,0.623"></Image>
+        <Image Source="images/anhnendaremove.png"
+               
+               Width="524"
+               Margin="137,110,0,0"
+               HorizontalAlignment="Left" VerticalAlignment="Top" Height="307"></Image>
+
+        <Grid HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Height="100"
+               Cursor="Hand"
+               Margin="608,222,0,358"
+               MouseDown="Image_MouseDown_Imotal"
+                MouseEnter="Image_MouseEnter_Imotal" RenderTransformOrigin="0.662,-0.087">
+            <Image Margin="-10,0,10,0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="images/button/0%-imotal-kteam.png"></Setter>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="False"></Condition>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Grid}, Path=IsMouseOver}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
+            <StackPanel HorizontalAlignment="Right"                        
+                    Width="100"                        
+                    Cursor="Hand"
+               Margin="0 0 20 1"
+                    VerticalAlignment="Bottom">
+                <TextBlock Name="abc" TextWrapping="Wrap"
+                           FontSize="30"
+                           TextAlignment="Right" 
+                           FontFamily="{StaticResource mainFont}" Height="48" Margin="-36,0,28,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="359.162"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Style>
+                        <Style  TargetType="{x:Type TextBlock}">
+                            <Setter Property="Text" Value="PLAY"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryStart}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryStart}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Height="100"
+               Cursor="Hand"
+               Margin="608,50,0,0"
+               MouseDown="Image_MouseDown_Imotal"
+                MouseEnter="Image_MouseEnter_Imotal" RenderTransformOrigin="0.662,-0.087">
+            <Image Margin="-10,0,10,0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="images/button/0%-imotal-kteam.png"></Setter>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="False"></Condition>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Grid}, Path=IsMouseOver}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
+            <StackPanel HorizontalAlignment="Right"                        
+                    Width="100"                        
+                    Cursor="Hand"
+               Margin="0 0 20 1"
+                    VerticalAlignment="Bottom">
+                <TextBlock TextWrapping="Wrap"
+                           FontSize="30"
+                           TextAlignment="Right" 
+                           FontFamily="{StaticResource mainFont}" Height="48" Margin="-36,0,28,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="359.162"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Text" Value="RULE"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryRule}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryRule}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               Height="100"
+               Cursor="Hand"
+               Margin="608,200,0,0"
+               MouseDown="Image_MouseDown_Imotal"
+                MouseEnter="Image_MouseEnter_Imotal" RenderTransformOrigin="0.662,-0.087">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="115*"/>
+                <ColumnDefinition Width="37*"/>
+            </Grid.ColumnDefinitions>
+            <Image Margin="-10,0,10,0" Grid.ColumnSpan="2">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="images/button/0%-imotal-kteam.png"></Setter>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="False"></Condition>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Grid}, Path=IsMouseOver}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsImotal}" Value="True"></Condition>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryStart}"></BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource imotalImageStoryEnd}"></BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
+            <StackPanel HorizontalAlignment="Right"                        
+                    Width="100"                        
+                    Cursor="Hand"
+               Margin="0 0 20 1"
+                    VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                <TextBlock TextWrapping="Wrap"
+                           FontSize="30"
+                           TextAlignment="Right" 
+                           FontFamily="{StaticResource mainFont}" Height="48" Margin="-36,0,15,0" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="359.162"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Text" Value="SCORE"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="False"/>
+                                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}, Mode=FindAncestor}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryScore}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsImotal}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource imotalStoryScore}"/>
+                                    </MultiDataTrigger.EnterActions>
+                                    <Setter Property="Foreground" Value="#F15A24"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <!--Created by TN-->
+        <TextBlock  FontFamily="{StaticResource mainFont}"
+                   Foreground="#00FFFF"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="0 0 250 10"
+                   FontSize="50">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="Created by TN"></Setter>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Window.Loaded">
+                            <BeginStoryboard Storyboard="{StaticResource createStoryStart}"></BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <!--Tạo bảng thoát game -->
+        <Grid Visibility="{Binding IsQuitBoxShow}" >
+            <Grid Background="Blue" Opacity="0.3"></Grid>
+            <Grid Height="250" Margin="0 0 0 50"
+                   HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <Image Source="images/khungoff.png"></Image>
+                <TextBlock Text="Are You Sure To Want Quit?" FontSize="25"
+                           HorizontalAlignment="Center"
+                           Foreground="#D83E1A"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="238"
+                           TextAlignment="Center"
+                           FontFamily="{StaticResource mainFont }" Height="74" Margin="85,90,96,86"></TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 80 30" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBlock Text="YES" MouseDown="TextBlock_MouseDown" Cursor="Hand" FontFamily="{StaticResource mainFont }" Foreground="#D83E1A" FontSize="25"  ></TextBlock>
+                    <TextBlock Text="/" FontFamily="{StaticResource mainFont }" Foreground="LightYellow" FontSize="25"  ></TextBlock>
+                    <TextBlock Text="NO" MouseDown="TextBlock_MouseDown_1" Cursor="Hand" FontFamily="{StaticResource mainFont }" Foreground="White" FontSize="25"  ></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--Tạo bảng đặt tên nhân vật -->
+        <Grid Visibility="{Binding IsNameUser}" >
+            <Grid Background="Blue" Opacity="0.3"></Grid>
+            <Grid Height="250" Margin="0 0 0 50"
+                   HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <Image Source="images/khungoff.png"/>
+                <TextBlock Text="Name Player:" FontSize="25"
+                           HorizontalAlignment="Center"
+                           Foreground="#D83E1A"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Width="193"
+                           TextAlignment="Center"
+                           FontFamily="{StaticResource mainFont }" Height="43" Margin="40,93,186,114"></TextBlock>
+                <TextBox x:Name="TenUser" Background="Transparent" Height="55" Width="150" Margin="233,81,36,114" FontSize="20" TextWrapping="Wrap" Foreground="#D83E1A" FontFamily="{StaticResource mainFont}" ></TextBox>
+                <StackPanel Orientation="Horizontal" Margin="0 0 80 30" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBlock Text="YES" MouseDown="TextBlock_MouseDown_2" Cursor="Hand" FontFamily="{StaticResource mainFont }" Foreground="#D83E1A" FontSize="25"   ></TextBlock>
+                    <TextBlock Text="/" FontFamily="{StaticResource mainFont }" Foreground="LightYellow" FontSize="25"  ></TextBlock>
+                    <TextBlock Text="NO" MouseDown="TextBlock_MouseDown_3" Cursor="Hand" FontFamily="{StaticResource mainFont }" Foreground="White" FontSize="25"  ></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--Tạo bảng đặt tên nhân vật -->
+        <RadioButton x:Name="easy" Margin="369,334,572,321" Content="Easy" FontFamily="Time New Romans" FontSize="20" Foreground="#D83E1A" />
+        <RadioButton x:Name="hard" Margin="369,364,572,291" Content="Hard" FontFamily="Time New Romans" FontSize="20" Foreground="#D83E1A" />
+        <Image x:Name="phaichonmode" Source="images/among/among10.png" Margin="310,364,610,240"></Image>
+    </Grid>
+</Window>
